@@ -16,7 +16,7 @@
 #define NSINT     264                             /* - табл.синтакс.правил; */
 #define NCEL       20                             /* - стека целей;         */
 #define NDST      500                             /* - стека достижений;    */
-#define NVXOD      57                             /* - табл.входов;         */
+#define NVXOD      56                             /* - табл.входов;         */
 #define NSTROKA   200                             /* - строки плотн.текста; */
 #define NNETRM     16                             /* - списка нетерминалов; */
 #define MAXLTXT    50                             /* - выходного текста;    */
