@@ -591,7 +591,9 @@ void compress_ISXTXT()                            /* Программа упло
                          ISXTXT[I1][I2] == '=' ||
                          ISXTXT[I1][I2] == '(' ||
                          ISXTXT[I1][I2] == ')' ||
-                         ISXTXT[I1][I2] == '*'
+                         ISXTXT[I1][I2] == '*' ||
+                         ISXTXT[I1][I2] == '<'||
+                         ISXTXT[I1][I2] == ','
                         )
                         &&
                         PREDSYM == ' '
