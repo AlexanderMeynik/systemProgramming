@@ -777,6 +777,9 @@ int numb(char *T1, int T2)                     /* вычисления поря�
 int sint_ANAL()                                  /*   построения  дерева   */
 /*синтаксического разбора,*/
 {
+    FILE *fptr1;
+    fptr1 = fopen("log.txt", "w");
+    fprintf(fptr1,"%s\n","I\tJ\tSTR[I]\tSINT[J]");
     int JMPComter=0;
     /*выполняющая роль синтак-*/
     /*сического анализатора   */
@@ -802,7 +805,7 @@ int sint_ANAL()                                  /*   построения  де
     J = SINT[J].POSL;
 
     L31:
-
+    fprintf(fptr1,"%d\t%d\t%c\t%s\t%d\n",I,J,STROKA[I],SINT[J].DER,JMPComter);
     I++;
 
     if (I > I4)
@@ -920,12 +923,16 @@ int sint_ANAL()                                  /*   построения  де
     J = CEL[K - 1].CEL3;
     K--;
 
-    if (J == 999)
+    if (J == 999) {
+        fprintf(fptr1,"%d\n",JMPComter);
+        fclose(fptr1);
         return 2;
+    }
     else {
         JMPComter++;
         goto L8;
     }
+
 
 }
 
