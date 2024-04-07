@@ -778,7 +778,8 @@ int sint_ANAL()                                  /*   построения  де
 {
     FILE *fptr1;
     fptr1 = fopen("log.txt", "w");
-    fprintf(fptr1,"%s\n","I\tJ\tSTR[I-1]\tSTR[I]\tSINT[J-1]\tSINT[J]\tSINT[J+1]");
+    //fprintf(fptr1,"%s\n","I\tJ\tSTR[I-1]\tSTR[I]\tSINT[J-1]\tSINT[J]\tSINT[J+1]");
+    fprintf(fptr1,"%s\n","I\tJ\tSTR[I-1]\tSTR[I]\tSINT[J]\tcount\tcomm");
     int JMPComter=0;
     /*выполняющая роль синтак-*/
     /*сического анализатора   */
@@ -796,15 +797,17 @@ int sint_ANAL()                                  /*   построения  де
         return 1;
 
     L2:
-
+    fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"L2");
     J = VXOD[numb(&STROKA[I], 1)].VX;//todo когда мы не находим ничего , вылетает в трубу
 
     L3:
-
+    fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"L3");
     J = SINT[J].POSL;
 
+
     L31://"I\tJ\tSTR[I-1]\tSTR[I]\tSINT[J-1]\tSINT[J]\tSINT[J+1]"
-    fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%s\t%s\t%d\n",I,J,STROKA[I],STROKA[I+1],SINT[SINT[J].PRED].DER,SINT[J].DER,SINT[SINT[J].POSL].DER,JMPComter);
+    //fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%s\t%s\t%d\n",I,J,STROKA[I],STROKA[I+1],SINT[SINT[J].PRED].DER,SINT[J].DER,SINT[SINT[J].POSL].DER,JMPComter);
+    fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"L31");
     I++;
 
     if (I > I4)
@@ -822,6 +825,7 @@ int sint_ANAL()                                  /*   построения  де
     }
 
     L4:
+    fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"L4");
 
     if (SINT[SINT[J].POSL].DER[0] == '*') {
         I--;
@@ -833,6 +837,7 @@ int sint_ANAL()                                  /*   построения  де
                 return 0;
 
             L5:
+            fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"L5");
 
             if (TPR[numb(CEL[K - 1].CEL1, 3)][numb(CEL[K - 1].CEL1, 3)]) {
                 J = VXOD[numb(CEL[K - 1].CEL1, 3)].VX;
@@ -841,44 +846,52 @@ int sint_ANAL()                                  /*   построения  де
             }
 
             L6:
+            fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"L6");
 
             J = CEL[K - 1].CEL3;
             K--;
             JMPComter++;
             goto L3;
         }
+        fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"!gL3");
 
         if (!TPR[numb(SINT[J].DER, 3)][numb(CEL[K - 1].CEL1, 3)]) {
             JMPComter++;
             goto L9;
         }
+        fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"!gL9");
 
         mdst(SINT[J].DER, CEL[K - 1].CEL2, 0, I, J);
         J = VXOD[numb(SINT[J].DER, 3)].VX;
         JMPComter++;
         goto L3;
     }
+    fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"!GL3");
 
     if (!TPR[numb(&STROKA[I], 1)][numb(SINT[J].DER, 3)]){
         JMPComter++;
         goto L8;
     }
+    fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"!GL8");
 
     mcel(SINT[J].DER, I, J);
     JMPComter++;
     goto L2;
 
     L8:
+    fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"L8");
 
     I--;
 
     L9:
+    fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"L9");
 
     if (SINT[J].ALT != 0) {
         J = SINT[J].ALT;
         JMPComter++;
         goto L31;
     }
+    fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"!GL31");
 
     J = SINT[J].PRED;
 
@@ -891,12 +904,14 @@ int sint_ANAL()                                  /*   построения  де
         mcel(DST[L - 1].DST1, DST[L - 1].DST2, DST[L - 1].DST3);
 
         L10:
+        fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"L10");
 
         J = DST[L - 1].DST5;
         L--;
         JMPComter++;
         goto L9;
     }
+    fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"!GL9");
 
     if
             (
@@ -908,22 +923,33 @@ int sint_ANAL()                                  /*   построения  де
             JMPComter++;
             goto L6;
         }
+
         else {
             JMPComter++;
+            fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"!gL9");
             goto L10;
         }
     }
+    fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"!gL10");
 
     if (SINT[J].PRED > 0) {
         JMPComter++;
         goto L8;
     }
+    fprintf(fptr1,"%d\t%d\t%c\t%c\t%s\t%d\t%s\n",I,J,STROKA[I],STROKA[I+1],SINT[J].DER,JMPComter,"!GL8");
 
     J = CEL[K - 1].CEL3;
     K--;
 
     if (J == 999) {
         fprintf(fptr1,"%d\n",JMPComter);
+        int comnw=0;
+        fprintf(fptr1,"%s","\n\n");
+        while(STROKA[comnw]!='\0')
+        {
+            fprintf(fptr1,"%d\t%c\n",comnw,STROKA[comnw]);
+            comnw++;
+        }
         fclose(fptr1);
         return 2;
     }
