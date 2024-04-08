@@ -6,10 +6,6 @@ komppl.exe: komppl.c
 	@echo "________k o m p p l . e x e        g e n e r a t i o n______"
 	gcc -m32 -g -o komppl.exe komppl.c
 	@echo "____________________________________________________________"
-komppl2.exe: komppl2.c
-	@echo "________k o m p p l 2 . e x e        g e n e r a t i o n______"
-	gcc -m32 -g -o komppl2.exe komppl2.c
-	@echo "____________________________________________________________"
 kompassr.exe: kompassr.c
 	@echo "________k o m p a s s r . e x e    g e n e r a t i o n______"
 	gcc -m32 -g -o kompassr.exe kompassr.c
