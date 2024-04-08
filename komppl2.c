@@ -1869,7 +1869,7 @@ int OPS2() {
     strcat(NUM,FORMT[IFORMT - 1]);
 
     int j=0;
-    while(FORMT[0][j]!='\0'&&FORMT[0][j]!=',')
+    while(FORMT[0][j]!='\0'&&FORMT[0][j]!=',')//разделим имена перменных
     {
         IPE1[j]=FORMT[0][j];
         j++;
@@ -1883,27 +1883,27 @@ int OPS2() {
         j++;
     }
     IPE2[j-disp]='\0';
-    for (i1 = 0; i1 < ISYM; i1++) {
-        if (!strcmp(SYM[i1].NAME, IPE1) &&  /* ределен ранее через    */
-            strlen(SYM[i1].NAME) ==               /* оператор DCL, то:      */
+    for (i1 = 0; i1 < ISYM; i1++) {//найдём первую переменную в списке символов
+        if (!strcmp(SYM[i1].NAME, IPE1) &&
+            strlen(SYM[i1].NAME) ==
             strlen(IPE1)
                 ) {
             goto SECOND;
         }
     }
     goto END4;
-    SECOND:for (i2 = 0; i2 < ISYM; i2++) {
-        if (!strcmp(SYM[i2].NAME, IPE2) &&  /* ределен ранее через    */
-            strlen(SYM[i2].NAME) ==               /* оператор DCL, то:      */
+    SECOND:for (i2 = 0; i2 < ISYM; i2++) {//найдём вторую переменную в списке символов
+        if (!strcmp(SYM[i2].NAME, IPE2) &&
+            strlen(SYM[i2].NAME) ==
             strlen(IPE2)
                 ) {
             goto THIRD;
         }
     }
     goto END4;
-    THIRD:for (i = 0; i < ISYM; i++) {
-        if (!strcmp(SYM[i].NAME, NUM) &&  /* ределен ранее через    */
-            strlen(SYM[i].NAME) ==               /* оператор DCL, то:      */
+    THIRD:for (i = 0; i < ISYM; i++) {//найдём @NUM в списке символов
+        if (!strcmp(SYM[i].NAME, NUM) &&
+            strlen(SYM[i].NAME) ==
             strlen(NUM)
                 ) {
             goto LAST;
@@ -1912,7 +1912,7 @@ int OPS2() {
     goto END4;
 
     LAST:
-    if (SYM[i1].TYPE == 'B'&&SYM[i2].TYPE == 'B')//&&SYM[i1].RAZR == "15"&&SYM[i2].RAZR == "15")//обе переменных должны быть половинными
+    if (SYM[i1].TYPE == 'B'&&SYM[i2].TYPE == 'B')
     {
         memcpy(ASS_CARD._BUFCARD.OPERAC,
                "LH", 2);
@@ -1980,15 +1980,12 @@ int CON1() {
 int CON2() {
     int ip,in;
     FORM();                                        /*форматируем ПЛ1-оператор*/
-    /*присваивания арифметич. */
     char IPE1[8];
     char NUM[8];
     memset(IPE1,0,8);
     memset(NUM,0,8);
     NUM[0]='@';
-    //memset(NUM,0,strlen(NUM));
-    //strcpy(NUM,"@");
-    //strcat(NUM,FORMT[IFORMT - 1]);
+
 
     int j=0;
     while(FORMT[0][j]!='\0'&&FORMT[0][j]!='<')
@@ -2097,7 +2094,6 @@ int OPC1() {
 
 int OPC2() {
     FORM();
-    int iii=0;
 
     memcpy(ASS_CARD._BUFCARD.OPERAC,
            "BC", 2);
@@ -2110,7 +2106,7 @@ int OPC2() {
            24);
     ZKARD();
     memcpy(ASS_CARD._BUFCARD.METKA,
-           "@EXIT", 5);
+           "@EXIT", 5);//у следующей после цикла операции будет метка выхода
     return 0;
 }
 
