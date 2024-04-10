@@ -1131,9 +1131,9 @@ int ODC1() {
         strcpy(SYM[ISYM++].INIT, FORMT[6]);       /* ем в табл. SYM это на- */
         /* чальное значение, а    */
     else                                            /* иначе                  */
-        strcpy(SYM[ISYM++].INIT, "0B");            /* инициализируем иденти- */
+        strcpy(SYM[ISYM++].INIT, "^0B");            /* инициализируем иденти- */
     /* фикатор нулем          */
-
+    //SYM[ISYM++].
     return 0;                                      /* успешное завешение     */
     /* программы              */
 }
@@ -1544,25 +1544,34 @@ int OEN2() {
                 ASS_CARD._BUFCARD.METKA[strlen
                         (ASS_CARD._BUFCARD.METKA)] = ' '; /* пишем разделитель полей*/
 
-                memcpy(ASS_CARD._BUFCARD.OPERAC,        /* пишем код псевдоопера- */
-                       "DC", 2); /* ции DC                 */
+                if(SYM[i].INIT[0]!='^')
+                {
+                    memcpy(ASS_CARD._BUFCARD.OPERAC,        /* пишем код псевдоопера- */
+                           "DC", 2); /* ции DC                 */
+                }
+                else
+                {
+                    memcpy(ASS_CARD._BUFCARD.OPERAC,        /* пишем код псевдоопера- */
+                           "DS", 2); /* ции DC                 */
+                }
 
-                if (strcmp(SYM[i].RAZR, "15") <= 0) /* формируем операнды псе-*/
-                    /* вдооперации DC         */
-                    strcpy(ASS_CARD._BUFCARD.OPERAND,      /* для случая полуслова   */
-                           "H\'");
-                else                                      /* или                    */
+                if (strcmp(SYM[i].RAZR, "15") <= 0)
+                    strcpy(ASS_CARD._BUFCARD.OPERAND,
+                           "H");
+                else
 
-                    strcpy(ASS_CARD._BUFCARD.OPERAND,      /* для случая слова       */                     "F\'");
-
-                strcat(ASS_CARD._BUFCARD.OPERAND, gcvt(VALUE(SYM[i].INIT), 10, &RAB[0]));
+                    strcpy(ASS_CARD._BUFCARD.OPERAND,                        "F");
+                if(SYM[i].INIT[0]!='^'){//если переменная инициализирована
+                    strcat(ASS_CARD._BUFCARD.OPERAND,
+                           "\'");
+                    strcat(ASS_CARD._BUFCARD.OPERAND, gcvt(VALUE(SYM[i].INIT), 10, &RAB[0]));
                 ASS_CARD._BUFCARD.OPERAND[strlen        /* замыкающий апостроф    */
-                        (ASS_CARD._BUFCARD.OPERAND)] = '\'';  /*          и             */
+                        (ASS_CARD._BUFCARD.OPERAND)] = '\'';  /*          и             */}
 
                 memcpy(ASS_CARD._BUFCARD.COMM,          /* поле построчного комен-*/
-                       "Variable definition", 19);  /* тария                  */
+                       " Variable definition", 20);  /* тария                  */
 
-                ZKARD();                                 /* запомнить операцию     */
+                ZKARD();
                 /*    Ассемблера          */
             }
         }
@@ -1602,14 +1611,14 @@ int OEN2() {
 
     memcpy(ASS_CARD._BUFCARD.METKA, "@RBASE", 6); /* формирование EQU-псев- */
     memcpy(ASS_CARD._BUFCARD.OPERAC, "EQU", 3);   /* дооперации определения */
-    memcpy(ASS_CARD._BUFCARD.OPERAND, "15", 2);  /* номера базового регист-*/
+    memcpy(ASS_CARD._BUFCARD.OPERAND, "5", 1);  /* номера базового регист-*/
     /* ра общего назначения   */
     /*           и            */
     ZKARD();                                       /* запоминание ее         */
 
     memcpy(ASS_CARD._BUFCARD.METKA, "@RRAB", 5);  /* формирование EQU-псев- */
     memcpy(ASS_CARD._BUFCARD.OPERAC, "EQU", 3);   /* дооперации определения */
-    memcpy(ASS_CARD._BUFCARD.OPERAND, "5", 1);   /* номера базового регист-*/
+    memcpy(ASS_CARD._BUFCARD.OPERAND, "3", 1);   /* номера базового регист-*/
     /* ра общего назначения   */
     /*            и           */
     ZKARD();                                       /* запоминание ее         */
@@ -1624,9 +1633,6 @@ int OEN2() {
     /* семблеровской псевдо-  */
     /* операции END,          */
     i = 0;
-
-    while (FORMT[1][i] != '\x0')                 /* ее операнда            */
-        ASS_CARD._BUFCARD.OPERAND[i] = FORMT[1][i++];/*         и              */
 
     memcpy(ASS_CARD._BUFCARD.COMM,                /* построчного коментария */
            "Program end", 11);
