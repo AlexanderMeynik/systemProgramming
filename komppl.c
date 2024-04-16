@@ -1559,14 +1559,18 @@ int OEN2() {
                     strcpy(ASS_CARD._BUFCARD.OPERAND,
                            "H");
                 else
-
                     strcpy(ASS_CARD._BUFCARD.OPERAND,                        "F");
+
                 if(SYM[i].INIT[0]!='^'){//если переменная инициализирована
                     strcat(ASS_CARD._BUFCARD.OPERAND,
                            "\'");
                     strcat(ASS_CARD._BUFCARD.OPERAND, gcvt(VALUE(SYM[i].INIT), 10, &RAB[0]));
                 ASS_CARD._BUFCARD.OPERAND[strlen        /* замыкающий апостроф    */
                         (ASS_CARD._BUFCARD.OPERAND)] = '\'';  /*          и             */}
+                else
+                    ASS_CARD._BUFCARD.OPERAND[strlen        /* замыкающий апостроф    */
+                            (ASS_CARD._BUFCARD.OPERAND)] = ' ';
+                   // strcat(ASS_CARD._BUFCARD.OPERAND," ");
 
                 memcpy(ASS_CARD._BUFCARD.COMM,          /* поле построчного комен-*/
                        " Variable definition", 20);  /* тария                  */
