@@ -794,7 +794,7 @@ int sint_ANAL()                                  /*   построения  де
         return 1;
 
     L2:
-    J = VXOD[numb(&STROKA[I], 1)].VX;//todo когда мы не находим ничего , вылетает в трубу
+    J = VXOD[numb(&STROKA[I], 1)].VX;
 
     L3:
     J = SINT[J].POSL;

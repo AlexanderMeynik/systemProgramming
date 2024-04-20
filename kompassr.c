@@ -320,11 +320,6 @@ int FDC()                                         /*подпр.обр.пс.оп�
     {
         T_SYM[ITSYM].DLSYM = 2;
         T_SYM[ITSYM].PRPER = 'R';
-        /*if ( CHADR % 4 )
-        {
-            CHADR = (CHADR /4 + 1) * 4;
-            T_SYM[ITSYM].ZNSYM = CHADR;
-        }*/
         PRNMET = 'N';
         CHADR = CHADR + 2;
     }
@@ -364,11 +359,6 @@ int FDS()                                         /*подпр.обр.пс.оп�
      {
         T_SYM[ITSYM].DLSYM = 2;
         T_SYM[ITSYM].PRPER = 'R';
-        /*if ( CHADR % 4 )
-        {
-            CHADR = (CHADR /4 + 1) * 4;
-            T_SYM[ITSYM].ZNSYM = CHADR;
-        }*/
         PRNMET = 'N';
         CHADR = CHADR + 2;
     }
@@ -524,11 +514,8 @@ int SDC()                                         /*подпр.обр.пс.оп�
                       "'"
               );
 
-      //RR.OP_RR.R1R2 = R1R2;
-
       RR.OP_RR.R1R2 = atoi ( RAB );                 /*перевод ASCII-> int     */
       RAB = (char *) &RR.OP_RR.R1R2;                /*приведение к соглашениям*/
-      //swab ( RAB , RAB , 2 );                       /* ЕС ЭВМ                 */
       size=2;
   }
   else                                            /*иначе                   */
