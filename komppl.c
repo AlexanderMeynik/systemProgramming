@@ -1819,7 +1819,11 @@ int ZNK2() {
 }
 
 /*..........................................................................*/
-
+bool StartsWith(const char *a, const char *b)
+{
+    if(strncmp(a, b, strlen(b)) == 0) return 1;
+    return 0;
+}
 int NUM1() {
     FORM();
     int i;
@@ -1836,6 +1840,21 @@ int NUM1() {
             strlen(NUM)
                 )
             return 0;//может так случиться, что в программе будет несколько одинаковых чисел
+
+        if (StartsWith(NUM,SYM[i].NAME)&&i==ISYM-1
+                ) {
+            memset(SYM[i].INIT,0,50);
+            memset(SYM[i].INIT,0,8);
+            memset(SYM[i].RAZR,0,5);
+
+            strcpy(SYM[i].NAME, NUM);          /* добавим число с индетификатором @NUM*/
+            strcpy(SYM[i].RAZR, "15\0");
+            SYM[i].TYPE = 'B';
+            strcpy(SYM[i].INIT, FORMT[0]);
+
+
+            return 0;
+        }
     }
 
     strcpy(SYM[ISYM].NAME, NUM);          /* добавим число с индетификатором @NUM*/
