@@ -596,7 +596,7 @@ l0:
   wclear(wblue);			//очистка окна регистров
   wind();
 
-  waddstr(wcyan, "готовность к выполнению очередной команды с адресом ");
+  waddstr(wcyan, "ready to perform the command with address ");
   wprintw(wcyan, "%.06lX", I - T_MOP[k].DLOP);
   waddstr(wcyan, "\n");
   wrefresh(wcyan);
