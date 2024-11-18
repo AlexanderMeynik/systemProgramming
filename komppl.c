@@ -660,7 +660,9 @@ void compress_ISXTXT()                            /* Программа упло
                 if (ISXTXT[I1][I2] == ' ' &&
                     (PREDSYM == ' ' || PREDSYM == ';' ||
                      PREDSYM == ')' || PREDSYM == ':' ||
-                     PREDSYM == '('
+                     PREDSYM == '('||PREDSYM == '+' ||
+                     PREDSYM == '-' ||PREDSYM == '=' ||
+                     PREDSYM == '*'
                     )
                         ) {
                     PREDSYM = ISXTXT[I1][I2];
@@ -683,15 +685,6 @@ void compress_ISXTXT()                            /* Программа упло
                         ) {
                     I3--;
                     goto L1;
-                }
-
-
-                if (ISXTXT[I1][I2] == ' ' &&
-                    (PREDSYM == '+' || PREDSYM == '-' ||
-                     PREDSYM == '=' || PREDSYM == '*'
-                    )
-                        ) {
-                    goto L2;
                 }
 
                 L1:
